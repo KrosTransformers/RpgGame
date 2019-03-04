@@ -1,4 +1,6 @@
-﻿namespace RpgGame
+﻿using System;
+
+namespace RpgGame
 {
 
     /// <summary>
@@ -46,6 +48,16 @@
         /// Amount of gold provided to hero for defeating this monster.
         /// </summary>
         private int _rewardGold = 500;
+
+        /// <summary>
+        /// Returns power of next attack.
+        /// </summary>
+        /// <returns>Power of next attack.</returns>
+        public int CalculateAttack()
+        {
+            Random r = new Random(Environment.TickCount);
+            return r.Next(_minAttack, _maxAttack + 1);
+        }
 
         /// <summary>
         /// Returns monster's description.
