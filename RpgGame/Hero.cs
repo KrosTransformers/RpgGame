@@ -1,4 +1,6 @@
-﻿namespace RpgGame
+﻿using System;
+
+namespace RpgGame
 {
     
     /// <summary>
@@ -30,7 +32,7 @@
         /// <summary>
         /// Current health.
         /// </summary>
-        private int _health = 100;
+        public int _health = 100;
 
         /// <summary>
         /// Maximum health.
@@ -71,6 +73,45 @@
         /// Percentual chance to score critical hit.
         /// </summary>
         private double _luck = 0.05;
+
+        /// <summary>
+        /// Returns power of next attack.
+        /// </summary>
+        /// <returns>Power of next attack.</returns>
+        public int CalculateAttack()
+        {
+            Random r = new Random(Environment.TickCount);
+            return (int)(r.Next(_minAttack, _maxAttack + 1) * (r.NextDouble() <= _luck ? 1.2 : 1.0));
+        }
+
+        /// <summary>
+        /// Calculates damage the hero will take from attack.
+        /// </summary>
+        /// <param name="attackPower">Power of attack.</param>
+        /// <returns>Damage the hero will take; 0 if hero evaded the attack.</returns>
+        public int CalculateDamage(int attackPower)
+        {
+            Random r = new Random(Environment.TickCount);
+
+            if (r.NextDouble() <= _evade)
+            {
+                // evaded attack
+                return 0;
+            }
+            else
+            {
+                return attackPower - _defense;
+            }
+        }
+
+        /// <summary>
+        /// Restores heroe's HP.
+        /// </summary>
+        /// <param name="potion">Health potion.</param>
+        public void DrinkPotion(Potion potion)
+        {
+            _health = Math.Min(_health + potion._maxHealedHp, _maxHealth);
+        }
 
         /// <summary>
         /// Returns hero's description.

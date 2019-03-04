@@ -22,7 +22,7 @@ namespace RpgGame
         /// <summary>
         /// Current health.
         /// </summary>
-        private int _health = 500;
+        public int _health = 500;
 
         /// <summary>
         /// Max health.
@@ -32,12 +32,12 @@ namespace RpgGame
         /// <summary>
         /// Minimum amount of attack this monster can inflict.
         /// </summary>
-        private int _minAttack = 54;
+        private int _minAttack = 12;
 
         /// <summary>
         /// Maximum amount of attack this monster can inflict.
         /// </summary>
-        private int _maxAttack = 86;
+        private int _maxAttack = 25;
 
         /// <summary>
         /// Amount of experience point rewarded to hero for defeating this monster.

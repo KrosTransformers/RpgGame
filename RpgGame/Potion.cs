@@ -10,12 +10,12 @@
         /// <summary>
         /// Name of the potion.
         /// </summary>
-        private string _name = "Medium potion";
+        public string _name = "Medium potion";
 
         /// <summary>
         /// Maximum amount of HP this potion could restore.
         /// </summary>
-        private int _maxHealedHp = 55;
+        public int _maxHealedHp = 55;
 
         /// <summary>
         /// Returns potion's description.
