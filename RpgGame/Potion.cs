@@ -17,6 +17,17 @@
         /// </summary>
         private int _maxHealedHp = 55;
 
+        /// <summary>
+        /// Returns potion's description.
+        /// </summary>
+        /// <returns>Potion's description.</returns>
+        public string DescribeMe()
+        {
+            return "Potion\n" +
+                  $"Name:  {_name}\n" +
+                  $"Heals: {_maxHealedHp} HP\n";
+        }
+
     }
 
 }

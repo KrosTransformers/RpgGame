@@ -20,7 +20,7 @@
         /// <summary>
         /// Hero's class.
         /// </summary>
-        private eHeroClass _clas = eHeroClass.Paladin;
+        private eHeroClass _class = eHeroClass.Paladin;
 
         /// <summary>
         /// Level.
@@ -71,6 +71,26 @@
         /// Percentual chance to score critical hit.
         /// </summary>
         private double _luck = 0.05;
+
+        /// <summary>
+        /// Returns hero's description.
+        /// </summary>
+        /// <returns>Hero's description.</returns>
+        public string DescribeMe()
+        {
+            return "Hero\n" +
+                  $"Name:       {_name}\n" +
+                  $"Race:       {_race}\n" +
+                  $"Class:      {_class}\n" +
+                  $"Level:      {_level}\n" +
+                  $"Health:     {_health} HP\n" +
+                  $"Gold:       {_gold}\n" +
+                  $"Min attack: {_minAttack}\n" +
+                  $"Max attack: {_maxAttack}\n" +
+                  $"Defense:    {_defense}\n" +
+                  $"Evade:      {_evade:0.00%}\n" +
+                  $"Luck:       {_luck:0.00%}\n";
+        }
 
     }
 

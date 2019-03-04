@@ -15,7 +15,7 @@
         /// <summary>
         /// Type of the monster.
         /// </summary>
-        private string _type = "Closer monster";
+        private string _type = "Closet monster";
 
         /// <summary>
         /// Current health.
@@ -46,6 +46,23 @@
         /// Amount of gold provided to hero for defeating this monster.
         /// </summary>
         private int _rewardGold = 500;
+
+        /// <summary>
+        /// Returns monster's description.
+        /// </summary>
+        /// <returns>Monster's description.</returns>
+        public string DescribeMe()
+        {
+            return "Monster\n" +
+                  $"Name:       {_name}\n" +
+                  $"Type:       {_type}\n" +
+                  $"Health:     {_health} HP\n" +
+                  $"Max health: {_maxHealth} HP\n" +
+                  $"Min attack: {_minAttack}\n" +
+                  $"Max attack: {_maxAttack}\n" +
+                  $"Reward:     {_rewardXp} XP\n" +
+                  $"Reward:     {_rewardGold} gold\n";
+        }
 
     }
 

@@ -27,6 +27,19 @@
         /// </summary>
         private int _maxDamage = 18;
 
+        /// <summary>
+        /// Returns weapon's description.
+        /// </summary>
+        /// <returns>Weapon's description.</returns>
+        public string DescribeMe()
+        {
+            return "Weapon\n" +
+                  $"Name:       {_name}\n" +
+                  $"Type:       {_type}\n" +
+                  $"Min damage: {_minDamage}\n" +
+                  $"Max damage: {_maxDamage}\n";
+        }
+
     }
 
     /// <summary>
