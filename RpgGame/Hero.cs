@@ -9,6 +9,23 @@ namespace RpgGame
     class Hero
     {
 
+        #region Constants
+
+        private const double NEXT_LVL_XP_MULTIPLIER = 2.2;
+        private const int MIN_HEALTH_ADDITION = 5;
+        private const int MAX_HEALTH_ADDITION = 15;
+        private const int MIN_ATTACK_ADDITION = 4;
+        private const int MAX_ATTACK_ADDITION = 9;
+        private const double MAX_ATTACK_MULTIPLIER = 1.67;
+        private const int MIN_DEFENSE_ADDITION = 3;
+        private const int MAX_DEFENSE_ADDITION = 7;
+        private const double EVADE_ADDITION = 0.005;
+        private const double LUCK_ADDITION = 0.02;
+
+        #endregion
+
+        #region Attributes
+
         /// <summary>
         /// Hero's name.
         /// </summary>
@@ -27,12 +44,7 @@ namespace RpgGame
         /// <summary>
         /// Level.
         /// </summary>
-        private int _level = 2;
-
-        /// <summary>
-        /// Current health.
-        /// </summary>
-        public int _health = 100;
+        private int _level = 2;        
 
         /// <summary>
         /// Maximum health.
@@ -40,14 +52,9 @@ namespace RpgGame
         private int _maxHealth = 100;
 
         /// <summary>
-        /// Experience points.
+        /// XP amount needed to achieve next level.
         /// </summary>
-        private int _xp = 80;
-
-        /// <summary>
-        /// Gold.
-        /// </summary>
-        private int _gold = 250;
+        private int _nextLevelXp = 100;
 
         /// <summary>
         /// Minimum amount of attack this monster can inflict.
@@ -73,6 +80,51 @@ namespace RpgGame
         /// Percentual chance to score critical hit.
         /// </summary>
         private double _luck = 0.05;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Current health.
+        /// </summary>
+        public int Health { get; set; } = 100;
+
+        /// <summary>
+        /// Checks whether hero is dead.
+        /// </summary>
+        public bool IsDead
+        {
+            get
+            {
+                return Health <= 0;
+            }
+        }
+
+        /// <summary>
+        /// Experience points.
+        /// </summary>
+        public int XP { get; set; } = 80;
+
+        /// <summary>
+        /// Checks whether hero can level up.
+        /// </summary>
+        public bool CanLevelUp
+        {
+            get
+            {
+                return XP >= _nextLevelXp;
+            }
+        }
+
+        /// <summary>
+        /// Gold.
+        /// </summary>
+        public int Gold { get; set; } = 250;
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Returns power of next attack.
@@ -110,7 +162,28 @@ namespace RpgGame
         /// <param name="potion">Health potion.</param>
         public void DrinkPotion(Potion potion)
         {
-            _health = Math.Min(_health + potion._maxHealedHp, _maxHealth);
+            Health = Math.Min(Health + potion.MaxHealedHp, _maxHealth);
+        }
+
+        /// <summary>
+        /// Levels up hero.
+        /// </summary>
+        public void LevelUp()
+        {
+            Random r = new Random(Environment.TickCount);
+
+            while (CanLevelUp)
+            {
+                _level++;
+                _nextLevelXp = (int)(_nextLevelXp * NEXT_LVL_XP_MULTIPLIER);
+
+                _maxHealth = (int)(_maxHealth * (1 + r.Next(MIN_HEALTH_ADDITION, MAX_HEALTH_ADDITION) / 100.0));
+                _minAttack += r.Next(MIN_ATTACK_ADDITION, MAX_ATTACK_ADDITION);
+                _maxAttack = (int)(_minAttack * MAX_ATTACK_MULTIPLIER);
+                _defense += r.Next(MIN_DEFENSE_ADDITION, MAX_DEFENSE_ADDITION);
+                _evade = Math.Min(0.9, _evade + EVADE_ADDITION);
+                _luck = Math.Min(1.0, _luck + LUCK_ADDITION);
+            }
         }
 
         /// <summary>
@@ -124,14 +197,25 @@ namespace RpgGame
                   $"Race:       {_race}\n" +
                   $"Class:      {_class}\n" +
                   $"Level:      {_level}\n" +
-                  $"Health:     {_health} HP\n" +
-                  $"Gold:       {_gold}\n" +
+                  $"Health:     {Health} HP\n" +
+                  $"Gold:       {Gold}\n" +
                   $"Min attack: {_minAttack}\n" +
                   $"Max attack: {_maxAttack}\n" +
                   $"Defense:    {_defense}\n" +
                   $"Evade:      {_evade:0.00%}\n" +
                   $"Luck:       {_luck:0.00%}\n";
         }
+
+        /// <summary>
+        /// Returns hero's simple current status.
+        /// </summary>
+        /// <returns>Hero's current status.</returns>
+        public string CurrentHeroStatus()
+        {
+            return $"{_name} is level {_level} {_race} {_class} with {Health}/{_maxHealth} HP, {_minAttack}-{_maxAttack} ATK, {_defense} DEF, {_luck:0.00%} LCK and {_evade:0.00%} EVA.";
+        }
+
+        #endregion
 
     }
 

@@ -17,7 +17,17 @@ namespace RpgGame
             {
                 if (HeroAttack(hero, monster))
                 {
-                    break;
+                    if (hero.CanLevelUp)
+                    {
+                        Console.WriteLine("Hero levels up!!!");                        
+                        hero.LevelUp();
+                        Console.WriteLine(hero.CurrentHeroStatus());
+                        Console.ReadKey();
+                    }
+
+                    monster = new Monster();
+                    Console.WriteLine("Hero encounters another monster!!!");
+                    Console.ReadKey();
                 }
 
 
@@ -39,15 +49,18 @@ namespace RpgGame
         private static bool HeroAttack(Hero hero, Monster monster)
         {
             int nextAttack = hero.CalculateAttack();
-            monster._health = Math.Max(monster._health - nextAttack, 0);
+            monster.Health = Math.Max(monster.Health - nextAttack, 0);
 
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine($"Hero attacks for {nextAttack} HP. Monster is left with {monster._health} HP.");
+            Console.WriteLine($"Hero attacks for {nextAttack} HP. Monster is left with {monster.Health} HP.");
             Console.ResetColor();
 
-            if (monster._health == 0)
+            if (monster.IsDead)
             {
-                Console.WriteLine("Monster is dead. YAY!");
+                hero.XP += monster.RewardXp;
+                hero.Gold += monster.RewardGold;
+
+                Console.WriteLine($"Monster is dead. YAY!\nHero recieves {monster.RewardXp} XP and {monster.RewardGold} gold.");
                 Console.ReadKey();
                 return true;
             }
@@ -68,13 +81,13 @@ namespace RpgGame
         {
             int nextAttack = monster.CalculateAttack();
             int damage = hero.CalculateDamage(nextAttack);
-            hero._health = Math.Max(hero._health - damage, 0);
+            hero.Health = Math.Max(hero.Health - damage, 0);
 
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine($"Monster attacks for {nextAttack} HP. Hero is left with {hero._health} HP.");
+            Console.WriteLine($"Monster attacks for {nextAttack} HP. Hero is left with {hero.Health} HP.");
             Console.ResetColor();
 
-            if (hero._health == 0)
+            if (hero.IsDead)
             {
                 Console.WriteLine("Hero is dead. OH NO!");
                 Console.ReadKey();
@@ -100,7 +113,7 @@ namespace RpgGame
                 Potion potion = new Potion();
                 hero.DrinkPotion(potion);
 
-                Console.WriteLine($"Hero founds {potion._name} and drinks it. Hero's health is {hero._health} HP.");
+                Console.WriteLine($"Hero founds {potion.Name} and drinks it. Hero's health is {hero.Health} HP.");
                 Console.ReadKey();
             }
         }

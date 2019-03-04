@@ -9,6 +9,8 @@ namespace RpgGame
     class Monster
     {
 
+        #region Attributes
+
         /// <summary>
         /// Name of the monster.
         /// </summary>
@@ -20,14 +22,9 @@ namespace RpgGame
         private string _type = "Closet monster";
 
         /// <summary>
-        /// Current health.
-        /// </summary>
-        public int _health = 500;
-
-        /// <summary>
         /// Max health.
         /// </summary>
-        private int _maxHealth = 500;
+        private int _maxHealth = 200;
 
         /// <summary>
         /// Minimum amount of attack this monster can inflict.
@@ -39,15 +36,39 @@ namespace RpgGame
         /// </summary>
         private int _maxAttack = 25;
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Current health.
+        /// </summary>
+        public int Health { get; set; } = 200;
+
+        /// <summary>
+        /// Checks whether monster is dead.
+        /// </summary>
+        public bool IsDead
+        {
+            get
+            {
+                return Health <= 0;
+            }
+        }
+
         /// <summary>
         /// Amount of experience point rewarded to hero for defeating this monster.
         /// </summary>
-        private int _rewardXp = 120;
+        public int RewardXp { get; } = 120;
 
         /// <summary>
         /// Amount of gold provided to hero for defeating this monster.
         /// </summary>
-        private int _rewardGold = 500;
+        public int RewardGold { get; } = 500;
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Returns power of next attack.
@@ -68,13 +89,15 @@ namespace RpgGame
             return "Monster\n" +
                   $"Name:       {_name}\n" +
                   $"Type:       {_type}\n" +
-                  $"Health:     {_health} HP\n" +
+                  $"Health:     {Health} HP\n" +
                   $"Max health: {_maxHealth} HP\n" +
                   $"Min attack: {_minAttack}\n" +
                   $"Max attack: {_maxAttack}\n" +
-                  $"Reward:     {_rewardXp} XP\n" +
-                  $"Reward:     {_rewardGold} gold\n";
+                  $"Reward:     {RewardXp} XP\n" +
+                  $"Reward:     {RewardGold} gold\n";
         }
+
+        #endregion
 
     }
 
