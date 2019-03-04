@@ -110,7 +110,21 @@ namespace RpgGame
             Random r = new Random(Environment.TickCount);
             if (r.NextDouble() <= chance)
             {
-                Potion potion = new Potion();
+                Potion potion;
+
+                double potionTypeChance = r.NextDouble();
+                if (potionTypeChance <= 0.3)
+                {
+                    potion = new Potion("Small potion", 20);
+                }
+                else if (potionTypeChance <= 0.9)
+                {
+                    potion = new Potion("Medium potion", 50);
+                }
+                else
+                {
+                    potion = new Potion("Super potion", 100);
+                }                
                 hero.DrinkPotion(potion);
 
                 Console.WriteLine($"Hero founds {potion.Name} and drinks it. Hero's health is {hero.Health} HP.");

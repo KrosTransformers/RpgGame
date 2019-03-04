@@ -29,57 +29,57 @@ namespace RpgGame
         /// <summary>
         /// Hero's name.
         /// </summary>
-        private string _name = "Lothar Lightbringer";
+        private string _name;
 
         /// <summary>
         /// Hero's race.
         /// </summary>
-        private eHeroRace _race = eHeroRace.Human;
+        private eHeroRace _race;
 
         /// <summary>
         /// Hero's class.
         /// </summary>
-        private eHeroClass _class = eHeroClass.Paladin;
+        private eHeroClass _class;
 
         /// <summary>
         /// Level.
         /// </summary>
-        private int _level = 2;        
+        private int _level;        
 
         /// <summary>
         /// Maximum health.
         /// </summary>
-        private int _maxHealth = 100;
+        private int _maxHealth;
 
         /// <summary>
         /// XP amount needed to achieve next level.
         /// </summary>
-        private int _nextLevelXp = 100;
+        private int _nextLevelXp;
 
         /// <summary>
         /// Minimum amount of attack this monster can inflict.
         /// </summary>
-        private int _minAttack = 12;
+        private int _minAttack;
 
         /// <summary>
         /// Maximum amount of attack this monster can inflict.
         /// </summary>
-        private int _maxAttack = 20;
+        private int _maxAttack;
 
         /// <summary>
         /// Strength of defense.
         /// </summary>
-        private int _defense = 5;
+        private int _defense;
 
         /// <summary>
         /// Percentual chance to evade incoming attack.
         /// </summary>
-        private double _evade = 0.025;
+        private double _evade;
 
         /// <summary>
         /// Percentual chance to score critical hit.
         /// </summary>
-        private double _luck = 0.05;
+        private double _luck;
 
         #endregion
 
@@ -88,7 +88,7 @@ namespace RpgGame
         /// <summary>
         /// Current health.
         /// </summary>
-        public int Health { get; set; } = 100;
+        public int Health { get; set; }
 
         /// <summary>
         /// Checks whether hero is dead.
@@ -104,7 +104,7 @@ namespace RpgGame
         /// <summary>
         /// Experience points.
         /// </summary>
-        public int XP { get; set; } = 80;
+        public int XP { get; set; }
 
         /// <summary>
         /// Checks whether hero can level up.
@@ -121,6 +121,31 @@ namespace RpgGame
         /// Gold.
         /// </summary>
         public int Gold { get; set; } = 250;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        public Hero()
+        {
+            _name = "Lothar Lightbringer";
+            _race = eHeroRace.Human;
+            _class = eHeroClass.Paladin;
+            _level = 2;
+            Health = 100;
+            _maxHealth = 100;
+            XP = 80;
+            _nextLevelXp = 100;
+            Gold = 250;
+            _minAttack = 12;
+            _maxAttack = 20;
+            _defense = 5;
+            _evade = 0.025;
+            _luck = 0.05;
+        }
 
         #endregion
 

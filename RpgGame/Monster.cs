@@ -14,27 +14,27 @@ namespace RpgGame
         /// <summary>
         /// Name of the monster.
         /// </summary>
-        private string _name = "Sully the Fluffer";
+        private string _name;
 
         /// <summary>
         /// Type of the monster.
         /// </summary>
-        private string _type = "Closet monster";
+        private string _type;
 
         /// <summary>
         /// Max health.
         /// </summary>
-        private int _maxHealth = 200;
+        private int _maxHealth;
 
         /// <summary>
         /// Minimum amount of attack this monster can inflict.
         /// </summary>
-        private int _minAttack = 12;
+        private int _minAttack;
 
         /// <summary>
         /// Maximum amount of attack this monster can inflict.
         /// </summary>
-        private int _maxAttack = 25;
+        private int _maxAttack;
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace RpgGame
         /// <summary>
         /// Current health.
         /// </summary>
-        public int Health { get; set; } = 200;
+        public int Health { get; set; }
 
         /// <summary>
         /// Checks whether monster is dead.
@@ -59,12 +59,31 @@ namespace RpgGame
         /// <summary>
         /// Amount of experience point rewarded to hero for defeating this monster.
         /// </summary>
-        public int RewardXp { get; } = 120;
+        public int RewardXp { get; private set; }
 
         /// <summary>
         /// Amount of gold provided to hero for defeating this monster.
         /// </summary>
-        public int RewardGold { get; } = 500;
+        public int RewardGold { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        public Monster()
+        {
+            _name = "Sully the Fluffer";
+            _type = "Closet monster";
+            Health = 200;
+            _maxHealth = 200;
+            _minAttack = 12;
+            _maxAttack = 25;
+            RewardXp = 120;
+            RewardGold = 500;
+        }
 
         #endregion
 

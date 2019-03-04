@@ -12,12 +12,27 @@
         /// <summary>
         /// Name of the potion.
         /// </summary>
-        public string Name { get; private set; } = "Medium potion";
+        public string Name { get; private set; }
 
         /// <summary>
         /// Maximum amount of HP this potion could restore.
         /// </summary>
-        public int MaxHealedHp { get; private set; } = 55;
+        public int MaxHealedHp { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        /// <param name="name">Name of the potion.</param>
+        /// <param name="maxHealedHp">Maximum amount of HP this potion could restore.</param>
+        public Potion(string name, int maxHealedHp)
+        {
+            Name = name;
+            MaxHealedHp = maxHealedHp;
+        }
 
         #endregion
 
