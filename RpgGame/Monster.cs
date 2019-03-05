@@ -9,17 +9,7 @@ namespace RpgGame
     class Monster
     {
 
-        #region Attributes
-
-        /// <summary>
-        /// Name of the monster.
-        /// </summary>
-        private string _name;
-
-        /// <summary>
-        /// Type of the monster.
-        /// </summary>
-        private string _type;
+        #region Attributes       
 
         /// <summary>
         /// Max health.
@@ -39,6 +29,16 @@ namespace RpgGame
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Name of the monster.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Type of the monster.
+        /// </summary>
+        public string Type { get; set; }
 
         /// <summary>
         /// Current health.
@@ -75,14 +75,28 @@ namespace RpgGame
         /// </summary>
         public Monster()
         {
-            _name = "Sully the Fluffer";
-            _type = "Closet monster";
+            Name = "Sully the Fluffer";
+            Type = "Closet monster";
             Health = 200;
             _maxHealth = 200;
             _minAttack = 12;
             _maxAttack = 25;
             RewardXp = 120;
             RewardGold = 500;
+        }
+
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        /// <param name="maxHealth">Max health.</param>
+        /// <param name="minAttack">Minimum amount of attack this monster can inflict.</param>
+        /// <param name="maxAttack">Maximum amount of attack this monster can inflict.</param>
+        public Monster(int maxHealth, int minAttack, int maxAttack):this()
+        {
+            Health = maxHealth;
+            _maxHealth = maxHealth;
+            _minAttack = minAttack;
+            _maxAttack = maxAttack;
         }
 
         #endregion
@@ -106,8 +120,8 @@ namespace RpgGame
         public string DescribeMe()
         {
             return "Monster\n" +
-                  $"Name:       {_name}\n" +
-                  $"Type:       {_type}\n" +
+                  $"Name:       {Name}\n" +
+                  $"Type:       {Type}\n" +
                   $"Health:     {Health} HP\n" +
                   $"Max health: {_maxHealth} HP\n" +
                   $"Min attack: {_minAttack}\n" +

@@ -39,12 +39,7 @@ namespace RpgGame
         /// <summary>
         /// Hero's class.
         /// </summary>
-        private eHeroClass _class;
-
-        /// <summary>
-        /// Level.
-        /// </summary>
-        private int _level;        
+        private eHeroClass _class;             
 
         /// <summary>
         /// Maximum health.
@@ -84,6 +79,11 @@ namespace RpgGame
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Level.
+        /// </summary>
+        public int Level { get; private set; }
 
         /// <summary>
         /// Current health.
@@ -134,7 +134,7 @@ namespace RpgGame
             _name = "Lothar Lightbringer";
             _race = eHeroRace.Human;
             _class = eHeroClass.Paladin;
-            _level = 2;
+            Level = 2;
             Health = 100;
             _maxHealth = 100;
             XP = 80;
@@ -199,7 +199,7 @@ namespace RpgGame
 
             while (CanLevelUp)
             {
-                _level++;
+                Level++;
                 _nextLevelXp = (int)(_nextLevelXp * NEXT_LVL_XP_MULTIPLIER);
 
                 _maxHealth = (int)(_maxHealth * (1 + r.Next(MIN_HEALTH_ADDITION, MAX_HEALTH_ADDITION) / 100.0));
@@ -221,7 +221,7 @@ namespace RpgGame
                   $"Name:       {_name}\n" +
                   $"Race:       {_race}\n" +
                   $"Class:      {_class}\n" +
-                  $"Level:      {_level}\n" +
+                  $"Level:      {Level}\n" +
                   $"Health:     {Health} HP\n" +
                   $"Gold:       {Gold}\n" +
                   $"Min attack: {_minAttack}\n" +
@@ -237,7 +237,7 @@ namespace RpgGame
         /// <returns>Hero's current status.</returns>
         public string CurrentHeroStatus()
         {
-            return $"{_name} is level {_level} {_race} {_class} with {Health}/{_maxHealth} HP, {_minAttack}-{_maxAttack} ATK, {_defense} DEF, {_luck:0.00%} LCK and {_evade:0.00%} EVA.";
+            return $"{_name} is level {Level} {_race} {_class} with {Health}/{_maxHealth} HP, {_minAttack}-{_maxAttack} ATK, {_defense} DEF, {_luck:0.00%} LCK and {_evade:0.00%} EVA.";
         }
 
         #endregion
